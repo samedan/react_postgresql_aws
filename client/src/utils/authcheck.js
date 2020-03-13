@@ -5,15 +5,17 @@ import { connect } from "react-redux";
 import axios from "axios";
 
 class AuthCheck extends Component {
-  send_profile_to_db = profile => {
-    const data = profile;
-    axios.post("/api/post/userprofiletodb", data).then(
-      axios
-        .get("/api/get/userprofilefromdb", {
-          params: { email: profile.profile.email }
-        })
-        .then(res => this.props.set_db_profile(res.data))
-    );
+  send_profile_to_db = async profile => {
+    // const data = profile;
+    const result = await axios.post("/api/post/userprofiletodb", profile);
+    // return result.data;
+    console.log(result);
+    const res = await axios.get("/api/get/userprofilefromdb", {
+      params: { email: profile.profile.email }
+    });
+
+    console.log(res.data);
+    this.props.set_db_profile(res.data);
   };
 
   componentDidMount() {

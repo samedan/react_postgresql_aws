@@ -37,3 +37,5 @@ CREATE TABLE messages (
   message_body VARCHAR,
   date_created TIMESTAMP
 );
+
+-- ALTER TABLE posts ADD COLUMN search_vector TSVECTOR
